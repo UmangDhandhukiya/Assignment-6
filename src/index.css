@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+
+/* from infinity css loader */
+.loader {
+  width: 60px;
+  aspect-ratio: 4;
+  height: 15px;
+  background:
+    radial-gradient(circle closest-side, #000 90%, transparent) 0%   50% no-repeat,
+    radial-gradient(circle closest-side, #000 90%, transparent) 50%  50% no-repeat,
+    radial-gradient(circle closest-side, #000 90%, transparent) 100% 50% no-repeat;
+  background-size: calc(100% / 3) 100%;
+  animation: loader-anim 1s infinite linear;
+}
+
+@keyframes loader-anim {
+  0% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0%,
+      calc(100% / 3) 0%;
+  }
+  33% {
+    background-size:
+      calc(100% / 3) 0%,
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0%;
+  }
+  66% {
+    background-size:
+      calc(100% / 3) 0%,
+      calc(100% / 3) 0%,
+      calc(100% / 3) 100%;
+  }
+  100% {
+    background-size:
+      calc(100% / 3) 100%,
+      calc(100% / 3) 0%,
+      calc(100% / 3) 0%;
+  }
+}
