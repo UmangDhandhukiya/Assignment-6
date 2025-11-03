@@ -4,8 +4,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { login } from "../appStore/authUserSlice";
 import type { AppDispatch } from "../appStore/store";
 
+/**
+ * Renders the Login component, handling user authentication via local storage persistence.
+ * Parameters: None.
+ * The component manages form input states, validates credentials against users stored in local storage, dispatches the Redux login action on success, and redirects to the home page.
+ */
 const Login: React.FC = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,18 +32,17 @@ const Login: React.FC = () => {
     // console.log(foundUser);
 
     if (foundUser) {
-
       // console.log("before")
       dispatch(login({ email: foundUser.email, password: foundUser.password }));
-      localStorage.setItem("user",JSON.stringify({ name: foundUser.name, email: foundUser.email }));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ name: foundUser.name, email: foundUser.email })
+      );
       setError("");
       navigate("/home");
       // console.log("after")
-
     } else {
-
       setError("Invalid credentials. Please check your email or password.");
-      
     }
   };
 

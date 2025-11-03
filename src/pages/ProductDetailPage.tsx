@@ -4,6 +4,11 @@ import Loader from "../components/Loader";
 import { ArrowLeft } from "lucide-react";
 import Rating from "@mui/material/Rating";
 
+/**
+ * Renders the detailed view page for a single product.
+ * Parameters: None. It retrieves the product 'id' from URL parameters.
+ * The component fetches detailed product information from the API, displays the image, description, price, metadata, and customer reviews.
+ */
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -70,30 +75,29 @@ const ProductDetailPage: React.FC = () => {
           {/* Reviews */}
           <div className="mt-6">
             <h2 className="text-xl font-semibold mb-3">Reviews</h2>
-              <div className="space-y-4">
-                {product.reviews.map((review: any, index: number) => (
-                  <div
-                    key={index}
-                    className="p-3 rounded-lg border-b-2 border-zinc-700 flex justify-between"
-                  >
-
-                    {/* use of mui */}
-                    <span>
-                      <Rating
-                        name="product-rating"
-                        value={review.rating}
-                        precision={0.5}
-                        readOnly
-                        size="small"
-                      />
-                      <p>{review.comment}</p>
-                    </span>
-                    <p className="text-gray-500 text-sm">
-                      ~ {review.reviewerName}
-                    </p>
-                  </div>
-                ))}
-              </div>
+            <div className="space-y-4">
+              {product.reviews.map((review: any, index: number) => (
+                <div
+                  key={index}
+                  className="p-3 rounded-lg border-b-2 border-zinc-700 flex justify-between"
+                >
+                  {/* use of mui */}
+                  <span>
+                    <Rating
+                      name="product-rating"
+                      value={review.rating}
+                      precision={0.5}
+                      readOnly
+                      size="small"
+                    />
+                    <p>{review.comment}</p>
+                  </span>
+                  <p className="text-gray-500 text-sm">
+                    ~ {review.reviewerName}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

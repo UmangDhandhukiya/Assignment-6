@@ -4,6 +4,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { register } from "../appStore/authUserSlice";
 import type { AppDispatch } from "../appStore/store";
 
+/**
+ * Renders the Register component, handling new user registration.
+ * Parameters: None.
+ * The component manages input states for registration fields, validates input (required fields and password match), dispatches the Redux 'register' action on success, and navigates the user to the login page.
+ */
 const Register: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,7 +50,10 @@ const Register: React.FC = () => {
       <div className="h-screen flex flex-col justify-center items-center w-full md:w-1/2 p-8">
         <h1 className="text-3xl font-bold mb-4">Register</h1>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 w-full max-w-sm">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-3 w-full max-w-sm"
+        >
           <input
             type="text"
             placeholder="Full Name"

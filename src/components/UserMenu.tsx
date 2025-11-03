@@ -11,6 +11,11 @@ interface Props {
   userName: string;
 }
 
+/**
+ * Renders the User Menu component, providing authenticated users with options for profile management and logout.
+ * Parameters: { userName } (The name of the user).
+ * The component manages the dropdown state and the visibility of profile and password modals, dispatching Redux actions for logout.
+ */
 const UserMenu: React.FC<Props> = ({ userName }) => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();

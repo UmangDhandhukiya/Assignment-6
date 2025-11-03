@@ -9,6 +9,10 @@ interface CardProps {
   thumbnail: string;
 }
 
+/**
+ * Defines the TypeScript interface for the properties expected by the Card component.
+ * This ensures the component receives strongly-typed data.
+ */
 const Card: React.FC<CardProps> = ({ id, title, description, price, thumbnail }) => {
   const navigate = useNavigate();
 

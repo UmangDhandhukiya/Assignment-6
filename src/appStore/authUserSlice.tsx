@@ -1,4 +1,10 @@
-import { createSlice,type PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+/**
+ * Creates a Redux Toolkit slice to manage the state of the user list.
+ * Parameters: None.
+ * This slice defines the initial state (an empty array) and three reducer functions for managing the user list: setting the initial list, updating a user by ID, and deleting a user by ID.
+ */
 
 interface User {
   name: string;
@@ -13,8 +19,10 @@ interface AuthState {
   isAuthenticated: boolean;
 }
 
-const loadUsers = (): User[] => JSON.parse(localStorage.getItem("users") || "[]");
-const loadCurrentUser = (): User | null => JSON.parse(localStorage.getItem("currentUser") || "null");
+const loadUsers = (): User[] =>
+  JSON.parse(localStorage.getItem("users") || "[]");
+const loadCurrentUser = (): User | null =>
+  JSON.parse(localStorage.getItem("currentUser") || "null");
 
 const initialState: AuthState = {
   users: loadUsers(),
@@ -35,13 +43,18 @@ const authUserSlice = createSlice({
         localStorage.setItem("users", JSON.stringify(users));
         state.users = users;
       }
-    },  
-    login: (state, action: PayloadAction<{ email: string; password: string }>) => {
+    },
+    login: (
+      state,
+      action: PayloadAction<{ email: string; password: string }>
+    ) => {
       const users = loadUsers();
       // console.log(users)
       // console.log(action.payload)
       const found = users.find(
-        (item) => item.email === action.payload.email && item.password === action.payload.password
+        (item) =>
+          item.email === action.payload.email &&
+          item.password === action.payload.password
       );
       // console.log(found)
       if (found) {
@@ -55,29 +68,45 @@ const authUserSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem("currentUser");
     },
-    editProfile: (state, action: PayloadAction<{ name: string; email: string }>) => {
+    editProfile: (
+      state,
+      action: PayloadAction<{ name: string; email: string }>
+    ) => {
       if (state.user) {
         const users = loadUsers().map((item) =>
-          item.email === state.user!.email ? { ...item, ...action.payload } : item
-        );
-
-        localStorage.setItem("users", JSON.stringify(users));
-        localStorage.setItem("currentUser", JSON.stringify({ ...state.user, ...action.payload }));
-
-        state.users = users;
-        state.user = { ...state.user, ...action.payload };
-      }
-    },
-    changePassword: (state, action: PayloadAction<{ oldPassword: string; newPassword: string }>) => {
-      if (state.user && state.user.password === action.payload.oldPassword) {
-        const users = loadUsers().map((item) =>
-          item.email === state.user!.email ? { ...item, password: action.payload.newPassword } : item
+          item.email === state.user!.email
+            ? { ...item, ...action.payload }
+            : item
         );
 
         localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem(
           "currentUser",
-          JSON.stringify({ ...state.user, password: action.payload.newPassword })
+          JSON.stringify({ ...state.user, ...action.payload })
+        );
+
+        state.users = users;
+        state.user = { ...state.user, ...action.payload };
+      }
+    },
+    changePassword: (
+      state,
+      action: PayloadAction<{ oldPassword: string; newPassword: string }>
+    ) => {
+      if (state.user && state.user.password === action.payload.oldPassword) {
+        const users = loadUsers().map((item) =>
+          item.email === state.user!.email
+            ? { ...item, password: action.payload.newPassword }
+            : item
+        );
+
+        localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            ...state.user,
+            password: action.payload.newPassword,
+          })
         );
 
         state.users = users;
@@ -87,5 +116,6 @@ const authUserSlice = createSlice({
   },
 });
 
-export const { register, login, logout, editProfile, changePassword } = authUserSlice.actions;
+export const { register, login, logout, editProfile, changePassword } =
+  authUserSlice.actions;
 export default authUserSlice.reducer;

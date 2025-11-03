@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery, setSortOption, setCategoryFilter } from "../appStore/productSlice";
 import type { RootState, AppDispatch } from "../appStore/store";
 
+/**
+ * Renders the Filters component, providing UI controls for searching, filtering by category, and sorting products.
+ * Parameters: None.
+ * The component retrieves product data from the Redux store to dynamically generate categories and dispatches actions to update global filtering/sorting states.
+ */
 const Filters: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const products = useSelector((state: RootState) => state.product.products);

@@ -6,6 +6,11 @@ import type { RootState, AppDispatch } from "../appStore/store";
 import Card from "../components/Card";
 import Loader from "../components/Loader";
 
+/**
+ * Renders the main Home component for displaying the product catalog.
+ * Parameters: None.
+ * This component fetches product data using React Query, synchronizes it with Redux, applies filtering/sorting based on Redux state, and handles pagination.
+ */
 const Home: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { products, searchQuery, categoryFilter, sortOption } = useSelector(

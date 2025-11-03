@@ -1,5 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+/**
+ * Defines the TypeScript interface for a single product object.
+ * This structure ensures type safety when handling individual product data across the application.
+ */
 export interface Product {
   id: number;
   title: string;

@@ -7,6 +7,11 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a modal window for the currently logged-in user to edit their name and email profile information.
+ * Parameters: { onClose } (Function to be called when the modal should close).
+ * The component retrieves the current user's data from the Redux store and dispatches an action to update it upon saving.
+ */
 const EditProfileModal: React.FC<Props> = ({ onClose }) => {
   const user = useSelector((state: RootState) => state.auth.user);
   const dispatch = useDispatch<AppDispatch>();

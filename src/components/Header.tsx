@@ -5,6 +5,11 @@ import type { RootState } from "../appStore/store";
 import Filters from "./Filters";
 import UserMenu from "./UserMenu";
 
+/**
+ * Renders the main Header component for the application.
+ * Parameters: None.
+ * The component retrieves the current logged-in user from the Redux store, displays the site title, manages a mobile navigation toggle, and embeds the Filters and UserMenu components.
+ */
 const Header: React.FC = () => {
   const user = useSelector((state: RootState) => state.auth.user);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,8 +18,8 @@ const Header: React.FC = () => {
     <header className="bg-zinc-900 text-white px-4 py-3 md:px-6 md:py-4 shadow-md relative">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">E-Commerce</h1>
-        
-       {/* Mobile View Button */}
+
+        {/* Mobile View Button */}
         <button
           className="md:hidden p-2 text-gray-300 hover:text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -22,7 +27,9 @@ const Header: React.FC = () => {
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <div className="hidden md:block">{user && <UserMenu userName={user.name} />}</div>
+        <div className="hidden md:block">
+          {user && <UserMenu userName={user.name} />}
+        </div>
       </div>
 
       <div
@@ -31,7 +38,9 @@ const Header: React.FC = () => {
         }`}
       >
         <Filters />
-        <div className="block md:hidden mt-3">{user && <UserMenu userName={user.name} />}</div>
+        <div className="block md:hidden mt-3">
+          {user && <UserMenu userName={user.name} />}
+        </div>
       </div>
     </header>
   );

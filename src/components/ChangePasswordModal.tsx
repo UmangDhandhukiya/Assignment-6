@@ -7,6 +7,11 @@ interface Props {
   onClose: () => void;
 }
 
+/**
+ * Renders a modal window for users to change their account password.
+ * Parameters: { onClose } (Function to be called when the modal should close).
+ * The component handles input state for old and new passwords, dispatches a Redux action to process the change, and uses AppDispatch type for correct Redux typing.
+ */
 const ChangePasswordModal: React.FC<Props> = ({ onClose }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [oldPassword, setOldPassword] = useState("");
